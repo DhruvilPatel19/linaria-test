@@ -40,7 +40,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.linaria\.js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
           {
@@ -52,6 +52,14 @@ module.exports = {
           {
             loader: '@linaria/webpack-loader',
             options: { sourceMap: dev, evaluate: true }
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              configFile: false,
+              babelrc: false,
+              plugins: ['./src/addSpecificity.js', '@babel/plugin-syntax-jsx']
+            }
           }
         ]
       },

@@ -6,13 +6,14 @@ import { returnStyle } from './constants'
 const xyzStyle = css`
   && {
     font-weight: 500;
-    color: red;
+    color: burlywood;
   }
 `
 
 const TempChile = styled.div`
   font-size: 30px;
   color: ${props => props.tempColor || 'red'};
+  -webkit-line-clamp: ${props => props.count};
   ${returnStyle('font-size: 50px')};
   ${multiLineEllipsis};
 `
@@ -41,9 +42,10 @@ export const Shimmer = styled.div`
   animation: placeHolderShimmer 1.25s linear infinite;
   ${placeHolderShimmer}
 `
-export const CustomColorShimmer = styled.div`
-  width: 100px;
-  height: 100px;
+export const CustomColorShimmer = styled(Shimmer)`
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
   background: ${props => props.bgColor}
     linear-gradient(
       to right,
@@ -53,8 +55,6 @@ export const CustomColorShimmer = styled.div`
       ${props => props.bgColor} 100%
     )
     800px 104px no-repeat;
-  animation: placeHolderShimmer 1.25s linear infinite;
-  ${placeHolderShimmer}
 `
 const multiLineEllipsis = `
   overflow: hidden;
@@ -64,15 +64,15 @@ const multiLineEllipsis = `
 `
 
 const Child1 = ({ className, style }) => (
-  <div>
-    <TempChile className={cx('xyz', className, style)} count='3'>
+  <div className={className}>
+    <TempChile className={cx('xyz', style)} count={3}>
       Inside Child 1
     </TempChile>
     <Shimmer />
-    <CustomColorShimmer bgColor='#f6f7f8' fgColor='#edeef1' />
+    <CustomColorShimmer bgColor='#f6f744' fgColor='#edeef1' />
   </div>
 )
 
-const Child2 = () => <Child1 style={xyzStyle} />
+const Child2 = () => <Child1 className={xyzStyle} />
 
 export default Child2
